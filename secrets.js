@@ -410,8 +410,10 @@
                 }
 
                 // though exps[-1] === undefined and undefined ^ anything = anything in
-                // chrome, this behavior may not hold everywhere, so do the check
-                sum = product === -1 ? sum : sum ^ config.exps[product]
+                // chrome, this behavior may not hold everywhere, so do the check.
+                // same goes for multiplication by 0: if product = log[0] = undefined
+                // sum should not change
+                sum = ((product === -1) || (product === undefined)) ? sum : sum ^ config.exps[product]
             }
         }
 
